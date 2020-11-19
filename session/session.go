@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/g8rswimmer/go-sfdc"
-	"github.com/g8rswimmer/go-sfdc/credentials"
+	"github.com/conormccarter/go-sfdc"
+	"github.com/conormccarter/go-sfdc/credentials"
 )
 
 // Session is the authentication response.  This is used to generate the
@@ -55,6 +55,18 @@ type sessionPasswordResponse struct {
 	TokenType   string `json:"token_type"`
 	IssuedAt    string `json:"issued_at"`
 	Signature   string `json:"signature"`
+}
+
+
+// sessionTokenResponse is the response from the SFDC server
+type sessionTokenResponse struct {
+	AccessToken string `json:"access_token"`
+  Signature   string `json:"signature"`
+  Scope       string `json:"scope"`
+	InstanceURL string `json:"instance_url"`
+	ID          string `json:"id"`
+	TokenType   string `json:"token_type"`
+	IssuedAt    string `json:"issued_at"`
 }
 
 const oauthEndpoint = "/services/oauth2/token"
