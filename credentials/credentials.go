@@ -25,6 +25,23 @@ type PasswordCredentials struct {
 	ClientSecret string
 }
 
+type TokenCredentials struct {
+	URL          string
+	AccessToken  string
+	RefreshToken string
+	ClientID     string
+	ClientSecret string
+}
+
+type CodeCredentials struct {
+	URL          string
+	Code  				string
+	RedirectURI string
+	ClientID     string
+	ClientSecret string
+}
+
+
 // Credentials is the structure that contains all of the
 // information for creating a session.
 type Credentials struct {
@@ -46,6 +63,10 @@ type grantType string
 
 const (
 	passwordGrantType grantType = "password"
+	// authorization_code is used to get the first refresh_token
+	authorizationCodeGrantType grantType = "authorization_code"
+	// refresh_token is used to refresh an expired (15 min old) access token
+	refreshTokenGrantType grantType = "refresh_token"
 )
 
 // Retrieve will return the reader for the HTTP request body.
@@ -95,6 +116,36 @@ func validatePasswordCredentials(cred PasswordCredentials) error {
 	}
 	if cred.ClientSecret == "" {
 		return errors.New("credentials: password credential's client secret can not be empty")
+	}
+	return nil
+}
+
+// NewTokenCredentials will create a credential with the password credentials.
+func NewTokenCredentials(creds TokenCredentials) (*Credentials, error) {
+	if err := validateTokenCredentials(creds); err != nil {
+		return nil, err
+	}
+	return &Credentials{
+		provider: &TokenProvider{
+			creds: creds,
+		},
+	}, nil
+}
+
+// validateTokenCredentials ensures the required params are there,
+// besides refresh (not always on the first run)
+func validateTokenCredentials(cred TokenCredentials) error {
+	if cred.URL == "" {
+		return errors.New("credentials: token credential's URL can not be empty")
+	}
+	if cred.RefreshToken == "" {
+		return errors.New("credentials: token credential's refresh token can not be empty")
+	}
+	if cred.ClientID == "" {
+		return errors.New("credentials: token credential's client ID can not be empty")
+	}
+	if cred.ClientSecret == "" {
+		return errors.New("credentials: token credential's client secret can not be empty")
 	}
 	return nil
 }
