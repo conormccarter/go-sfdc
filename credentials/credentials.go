@@ -25,6 +25,7 @@ type PasswordCredentials struct {
 	ClientSecret string
 }
 
+// TokenCredentials is the token secret for the connected application.
 type TokenCredentials struct {
 	URL          string
 	AccessToken  string
@@ -33,6 +34,7 @@ type TokenCredentials struct {
 	ClientSecret string
 }
 
+// CodeCredentials is the auth code secret for the connected application.
 type CodeCredentials struct {
 	URL          string
 	Code  				string
