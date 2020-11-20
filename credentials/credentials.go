@@ -37,12 +37,11 @@ type TokenCredentials struct {
 // CodeCredentials is the auth code secret for the connected application.
 type CodeCredentials struct {
 	URL          string
-	Code  				string
-	RedirectURI string
+	Code         string
+	RedirectURI  string
 	ClientID     string
 	ClientSecret string
 }
-
 
 // Credentials is the structure that contains all of the
 // information for creating a session.
