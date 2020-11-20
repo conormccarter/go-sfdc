@@ -128,7 +128,7 @@ func NewTokenCredentials(creds TokenCredentials) (*Credentials, error) {
 		return nil, err
 	}
 	return &Credentials{
-		provider: &TokenProvider{
+		provider: &RefreshTokenProvider{
 			creds: creds,
 		},
 	}, nil
