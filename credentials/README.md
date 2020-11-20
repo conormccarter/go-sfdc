@@ -24,3 +24,18 @@ config := sfdc.Configuration{
 	Version:     44,
 }
 ```
+### Refresh Token
+```go
+creds := credentials.TokenCredentials{
+  	URL:          "https://login.salesforce.com",
+    	RefreshToken: "5AEC...................................................................................",
+  	ClientID:     "3MVG................................................................................",
+  	ClientSecret: "ABBE............................................................",
+  }
+
+config := sfdc.Configuration{
+  	Credentials: credentials.NewTokenCredentials(creds),
+  	Client:      http.DefaultClient,
+  	Version:     50,
+  }
+```
