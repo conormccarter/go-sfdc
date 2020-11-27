@@ -57,12 +57,11 @@ type sessionPasswordResponse struct {
 	Signature   string `json:"signature"`
 }
 
-
 // sessionTokenResponse is the response from the SFDC server
 type sessionTokenResponse struct {
 	AccessToken string `json:"access_token"`
-  Signature   string `json:"signature"`
-  Scope       string `json:"scope"`
+	Signature   string `json:"signature"`
+	Scope       string `json:"scope"`
 	InstanceURL string `json:"instance_url"`
 	ID          string `json:"id"`
 	TokenType   string `json:"token_type"`
